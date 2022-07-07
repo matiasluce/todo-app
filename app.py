@@ -1,4 +1,4 @@
-from flask import Flask ,jsonify,request
+from flask import Flask ,jsonify,request,render_template
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -35,6 +35,10 @@ def get_Productos():
     all_productos = Tarea.query.all()
     result = productos_schema.dump(all_productos)
     return jsonify(result)
+
+@app.route('/index',methods=['GET'])
+def index():
+    return render_template("index.html")
 
 @app.route('/tareas/<id>',methods=['GET'])
 def get_producto(id):
