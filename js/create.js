@@ -9,7 +9,7 @@ function guardar() {
         desc: d,
         done: 0
     }
-    let url = "https://crud-shop-flask.herokuapp.com/productos"
+    let url = "https://crud-todo-flask.herokuapp.com/tareas"
     var options = {
         body: JSON.stringify(producto),
         method: 'POST',

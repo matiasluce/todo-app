@@ -21,7 +21,7 @@ function modificar() {
         desc: d,
         done: s
     }
-    let url = "https://crud-shop-flask.herokuapp.com/productos/"+id
+    let url = "https://crud-todo-flask.herokuapp.com/tareas/"+id
     var options = {
         body: JSON.stringify(producto),
         method: 'PUT',

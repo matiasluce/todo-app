@@ -2,12 +2,12 @@ if (document.getElementById("app")) {
     const app = new Vue({
         el: "#app",
         data: {
-            productos: [],
+            tareas: [],
             errored: false,
             loading: true
         },
         created() {
-            var url = 'https://crud-shop-flask.herokuapp.com/productos'
+            var url = 'https://crud-todo-flask.herokuapp.com/tareas'
             this.fetchData(url)
         },
         methods: {
@@ -22,8 +22,8 @@ if (document.getElementById("app")) {
                         this.errored = true
                     })
             },
-            eliminar(producto) {
-                const url = 'https://crud-shop-flask.herokuapp.com/producto/' + producto;
+            eliminar(tarea) {
+                const url = 'https://crud-todo-flask.herokuapp.com/tareas/' + tarea;
                 var options = {
                     method: 'DELETE',
                 }
