@@ -36,9 +36,9 @@ def get_Productos():
     result = productos_schema.dump(all_productos)
     return jsonify(result)
 
-@app.route('/index',methods=['GET'])
-def index():
-    return render_template("index.html")
+@app.route('/',methods=['GET'])
+def home():
+    return render_template('index.html')
 
 @app.route('/tareas/<id>',methods=['GET'])
 def get_producto(id):
