@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
-class Producto(db.Model):
+class Tarea(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(500))
     desc = db.Column(db.String(500))
@@ -23,27 +23,27 @@ class Producto(db.Model):
     
 db.create_all() #Crea las tablas
 
-class ProductoSchema(ma.Schema):
+class TareaSchema(ma.Schema):
     class Meta:
         fields=('id','name','desc','done')
 
-producto_schema = ProductoSchema()
-productos_schema = ProductoSchema(many = True)
+producto_schema = TareaSchema()
+productos_schema = TareaSchema(many = True)
 
 @app.route('/tareas',methods=['GET'])
 def get_Productos():
-    all_productos = Producto.query.all()
+    all_productos = Tarea.query.all()
     result = productos_schema.dump(all_productos)
     return jsonify(result)
 
 @app.route('/tareas/<id>',methods=['GET'])
 def get_producto(id):
-    producto=Producto.query.get(id)
+    producto=Tarea.query.get(id)
     return producto_schema.jsonify(producto)
 
 @app.route('/tareas/<id>',methods=['DELETE'])
 def delete_producto(id):
-    producto=Producto.query.get(id)
+    producto=Tarea.query.get(id)
     db.session.delete(producto)
     db.session.commit()
     return producto_schema.jsonify(producto)
@@ -54,14 +54,14 @@ def create_producto():
     name=request.json['name']
     desc=request.json['desc']
     done=request.json['done']
-    new_producto=Producto(name,desc,done)
+    new_producto=Tarea(name,desc,done)
     db.session.add(new_producto)
     db.session.commit()
     return producto_schema.jsonify(new_producto)
 
 @app.route('/tareas/<id>' ,methods=['PUT'])
 def update_producto(id):
-    producto=Producto.query.get(id)
+    producto=Tarea.query.get(id)
    
     name=request.json['name']
     desc=request.json['desc']
