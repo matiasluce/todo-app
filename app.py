@@ -15,7 +15,7 @@ class Producto(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(500))
     desc = db.Column(db.String(500))
-    done = db.Colum(db.Boolean())
+    done = db.Column(db.Boolean())
     def __init__(self,name,desc,done):
         self.name = name
         self.desc = desc
