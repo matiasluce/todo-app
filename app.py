@@ -30,25 +30,25 @@ class ProductoSchema(ma.Schema):
 producto_schema = ProductoSchema()
 productos_schema = ProductoSchema(many = True)
 
-@app.route('/productos',methods=['GET'])
+@app.route('/tareas',methods=['GET'])
 def get_Productos():
     all_productos = Producto.query.all()
     result = productos_schema.dump(all_productos)
     return jsonify(result)
 
-@app.route('/productos/<id>',methods=['GET'])
+@app.route('/tareas/<id>',methods=['GET'])
 def get_producto(id):
     producto=Producto.query.get(id)
     return producto_schema.jsonify(producto)
 
-@app.route('/producto/<id>',methods=['DELETE'])
+@app.route('/tareas/<id>',methods=['DELETE'])
 def delete_producto(id):
     producto=Producto.query.get(id)
     db.session.delete(producto)
     db.session.commit()
     return producto_schema.jsonify(producto)
 
-@app.route('/productos', methods=['POST']) # crea ruta o endpoint
+@app.route('/tareas', methods=['POST']) # crea ruta o endpoint
 def create_producto():
     print(request.json)  # request.json contiene el json que envio el cliente
     name=request.json['name']
@@ -59,7 +59,7 @@ def create_producto():
     db.session.commit()
     return producto_schema.jsonify(new_producto)
 
-@app.route('/productos/<id>' ,methods=['PUT'])
+@app.route('/tareas/<id>' ,methods=['PUT'])
 def update_producto(id):
     producto=Producto.query.get(id)
    
